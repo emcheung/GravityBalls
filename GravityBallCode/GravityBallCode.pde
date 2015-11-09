@@ -1,5 +1,5 @@
 //declare variables
-float x, y, velX, velY, diam;
+float x, y, velX, velY, a, diam;
 
 void setup() {
   //set size of canvas
@@ -11,6 +11,7 @@ void setup() {
   diam = 80;
   velX = random(-5, 5);
   velY = random(-5, 5);
+  a = 2;
 }
 
 void draw() {
@@ -19,7 +20,10 @@ void draw() {
 
   //draw ball
   ellipse(x, y, diam, diam);
-
+  
+  //add acceleration to velocity
+  velY += a;
+  
   //add velocity to position
   x += velX;
   y += velY;
@@ -34,5 +38,13 @@ void draw() {
     velY = -abs(velY);
   } else if (y - diam/2 <= 0) {
     velY = abs(velY);
+  }
+  
+  //reset if click
+  if (mousePressed) {
+    x = mouseX;
+    y = mouseY;
+    velX = random(-5, 5);
+    velY = random(-5, 5);
   }
 }
