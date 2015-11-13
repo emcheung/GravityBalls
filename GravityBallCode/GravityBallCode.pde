@@ -1,7 +1,7 @@
 //declare variables
 //float x[i], y[i], velX[i], velY[i], a, diam;
 
-int count = 1;
+int count = 30;
 
 float[] x = new float[count];
 float[] y = new float[count];
@@ -9,11 +9,17 @@ float[] velX = new float [count];
 float[] velY = new float [count];
 float a;
 float diam;
+float b;
+float db;
 
 void setup() {
   //set size of canvas
   size(800, 600);
   background(0);
+  frameRate(30);
+  colorMode(HSB, width);
+  b = 0;
+  db = 5;
 
   //initialize variables
   for (int i = 0; i < count; i += 1) {
@@ -22,13 +28,21 @@ void setup() {
     diam = 40;
     velX[i] = random(-5, 5);
     velY[i] = random(-5, 5);
-    a = 2;
+    a = 1;
   }
 }
 
 void draw() {
-  //draw background to cover previous frame
-  //background(0);
+  //changing background
+  background(b, b, b);
+  b += db;
+  if (b > width && b <= width + db){
+    db *= -1;
+  }
+  if (b < 0 && b>= -db){
+    db *= -1;
+  }
+  
 
   int i = 0;
 
@@ -55,14 +69,21 @@ void draw() {
     } else if (y[i] - diam/2 <= 0) {
       velY[i] = abs(velY[i]);
     }
+    
+    if (dist(mouseX, mouseY, x[i], y[i]) < diam/2) {
+      velX[i] = 20;
+      velY[i] = 20;
+      fill(x[i], y[i], width);
+    }
 
     //reset if click
     if (mousePressed) {
-      x[i] = mouseX;
-      y[i] = mouseY;
+      x[i] = width/2;
+      y[i] = height/2;
       velX[i] = random(-5, 5);
       velY[i] = random(-5, 5);
     }
+    
     i += 1;
   }
 }
