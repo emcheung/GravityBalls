@@ -9,3 +9,7 @@
 * On this branch, modify your code to have 30 of these gravity balls (or some other number in that range). Once again, remember to commit and sync
 * Merge this new branch back in to the master branch
 * You're done for the day!
+
+
+##Acceleration
+Just as _velocity_ is change in position over time, _acceleration_ is change in _velocity_ over time. Creating acceleration is going to be very similar to creating velocity. I recommend a variable - perhaps call it "gravity"? I also recommend a small value - perhaps somewhere around .1
